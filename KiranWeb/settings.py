@@ -127,3 +127,5 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/images/products/all/'
 MEDIA_ROOT = BASE_DIR
+print("Running with ALLOWED_HOSTS:", ALLOWED_HOSTS)
+
