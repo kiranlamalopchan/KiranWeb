@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+    <!--Products Banner-->
+    <div class="mb-3">
+        {% for productbanner in productbanners %}
+            <img src="{{ productbanner.image.url }}" alt="">
+        {% endfor %}
+    </div>
+    <!--End Products Banner-->
+    <div class="container">
+        <div class="border p-3" style="background-color: #E9ECEF;">
+        <h3 class="uk-text-bolder">Product By Brands</h3>
+            <!--Products By Brands-->
+            <a class="btn btn-primary float-shadow" style="background-color: black; border: black"
+               data-toggle="collapse"
+               href="#collapseApple" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Apple
+            </a>
+            <a class="btn btn-primary float-shadow" style="background-color: black; border: black"
+               data-toggle="collapse"
+               href="#collapseBose" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Bose
+            </a>
+            <a class="btn btn-primary float-shadow" style="background-color: black; border: black"
+               data-toggle="collapse"
+               href="#collapseExample" role="button" aria-expanded="false"
+               aria-controls="collapseExample">
+                JBL
+            </a>
+            <a class="btn btn-primary float-shadow" style="background-color: black; border: black"
+               data-toggle="collapse"
+               href="#collapseExample" role="button" aria-expanded="false"
+               aria-controls="collapseExample">
+                Case Logic
+            </a>
+            <div class="collapse my-3" id="collapseApple">
+                <div class="card card-body" style="background-color: lightgray; border-color: lightgray">
+                    <h3 class="uk-text-uppercase text-center uk-text-bolder">Select Category</h3>
+                    <div class="row">
+                        <div class="mx-auto">
+                            {% for applecategory in applecategories %}
+                                <a class="btn border sweep-to-right"
+                                   href="/apple/products/?categoryId={{ applecategory.id }}">
+                                    {{ applecategory.name }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse my-3" id="collapseBose">
+                <div class="card card-body" style="background-color: lightgray; border-color: lightgray">
+                    <h3 class="uk-text-uppercase text-center uk-text-bolder">select category</h3>
+                    <div class="row">
+                        <div class="mx-auto">
+                            {% for bose in bose %}
+                                <a class="btn border border-3 m-3 sweep-to-right"
+                                   href="/bose/products/?subcategoryId={{ bose.subcategory_id }}">
+                                    {{ bose.name }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Products By Brands Ends-->
+        </div>
+
+
+        <!--Products By Category-->
+        <div class="row mx-3">
+            {% for product_category in products_categories %}
+                <div class="col-sm-6 col-lg-3 mb-5">
+                    <div class="uk-text-center">
+                        <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                            <div class="p-4">
+                                <img src="{{ product_category.image.url }}" alt="products detail">
+                            </div>
+                            <div class="m-0">
+                                <span class="uk-margin-small-top uk-text-normal">{{ product_category.name }}</span><br>
+                                <span class="">{{ product_category.specs }}</span><br>
+                                <span class="uk-text-bolder">NPR
+                                    {{ product_category.price|intcomma }}</span>
+                            </div>
+                            <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
+                                <a href="/product-details/?productsId={{ product_category.id }}"
+                                   class="btn mx-auto border sweep-to-right"
+                                   style="background-color: #cccccc">Choose
+                                    Specs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!--Products BY Category end-->
+
+    <!--Products by sub category-->
+    <div class="row mx-3">
+        {% for product_subcategory in products_subcategories %}
+            <div class="col-sm-6 col-lg-3 mb-5">
+                <div class="uk-text-center">
+                    <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                        <div class="p-4">
+                            <img src="{{ product_subcategory.image.url }}" alt="products detail">
+                        </div>
+                        <div class="m-0">
+                            <span class="uk-margin-small-top uk-text-normal">{{ product_subcategory.name }}</span><br>
+                            {% if product_subcategory.specs == 'None' %}
+                                <span hidden class="">{{ product_subcategory.specs }}</span><br>
+                            {% elif product_subcategory.specs %}
+                                <span class="">{{ product_subcategory.specs }}</span><br>
+                            {% endif %}
+                            <span class="uk-text-bolder">NPR
+                                {{ product_subcategory.price|intcomma }}</span>
+                        </div>
+                        <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
+                            <a href="/product-details/?productsId={{ product_subcategory.id }}"
+                               class="btn mx-auto border sweep-to-right"
+                               style="background-color: #cccccc">Choose
+                                Specs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    <!--Products bu sub category End--
+{% endblock %}

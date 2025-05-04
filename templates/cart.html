@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load cart %}
+    {% load humanize %}
+    {% if message %}
+        <div class="text-center m-5">
+            <i class="fas fa-cart-plus fa-10x"></i>
+            <h1 class="text-center uk-text-bolder">
+                {{ message }}
+            </h1>
+            <a href="/">
+                <button type="button" class="btn btn-lg border sweep-to-right">Continue Shopping</button>
+            </a>
+
+        </div>
+    {% else %}
+        <div class="container">
+            <!--Review Cart-->
+            <h1 class="text-center uk-text-bolder m-3">Review Cart</h1>
+            <div clas="border">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th scope="col">Product-Id</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Per. Unit</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                    </thead>
+                    {% for product in products %}
+                        <tbody style="background-color: #F7F7F9">
+                        <tr class="text-center">
+                            <th scope="row" class="mx-auto">{{ product.id }}</th>
+                            <td><img style="height: 50px;" src="{{ product.image.url }}" alt="products in cart"></td>
+                            <td>{{ product.name }}</td>
+                            <td>Nrs. {{ product.price|intcomma }}</td>
+                            <td>{{ product|cart_quantity:request.session.cart }}</td>
+                            <td>Nrs. {{ product|cart_total_price:request.session.cart|intcomma }}</td>
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                    <tfoot>
+                    <tr class="thead-dark">
+                        <th colspan="5" class="text-right">Total Price</th>
+                        <th>Nrs. {{ products|cart_total_cart_price:request.session.cart|intcomma }}</th>
+                    </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+            <!--Review Cart End-->
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <table class="table">
+                        <thead>
+                        <tr class="thead-dark">
+                            <th colspan="6" class="text-center">Cart Total</th>
+                        </tr>
+                        </thead>
+                        <tbody style="background-color: #F7F7F9">
+                        <tr>
+                            <th scope="col">Sub-Total</th>
+                            <th>Nrs. {{ products|cart_total_cart_price:request.session.cart|intcomma }}</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Delivery</th>
+                            <th>Free</th>
+                        </tr>
+                        <tr>
+                            <th colspan="6">Enter your coupon</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">
+                                <input class="btn-lg" type="text" placeholder="Enter Coupen Code"
+                                       style="background-color: #F7F7F9; border: none">
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-sm border sweep-to-right">Apply Coupen</button>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <table class="table">
+                        <thead>
+                        <tr class="thead-dark">
+                            <th colspan="6" class="text-center">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody style="background-color: #E9ECEF">
+                        <tr>
+                            <th scope="col">Grand Total</th>
+                            <th>Nrs. {{ products|cart_total_cart_price:request.session.cart|intcomma }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="underline-from-center"
+                                   href="/" style="text-decoration: none; color: black">Continue Shopping</a>
+                            </td>
+                            <td>
+                                <a href="/checkout">
+                                    <button type="button" class="btn btn-sm border sweep-to-right">Check Out</button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

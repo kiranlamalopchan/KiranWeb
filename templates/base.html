@@ -1,0 +1,444 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiran Web Development</title>
+    <link rel="shortcut icon" type="image/png" href="{% static '/icon/kiran_logo.png' %}">
+    <!----LINK AND SCRIPTS---->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Fotorama from CDNJS, 19 KB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <!-- jQuery 1.8 or later, 33 KB -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.min.js"></script>
+    <link rel="stylesheet" href="{% static '/css/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/hovereffect.css' %}" rel="stylesheet">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/css/uikit.min.css"/>
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/js/uikit-icons.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!----END LINK AND SCRIPTS---->
+</head>
+<!---NAVBAR---->
+<div class="sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
+        <a class="navbar-brand" href="/" style="font-family: 'Poppins'; font-weight:bolder;">Kiran Web Development</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Apple <i class="fas fa-caret-down"></i></a>
+                </li>
+                <div class="uk-width-auto" uk-dropdown>
+                    <div class="uk-dropdown-grid uk-child-auto" uk-grid>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Mac</li>
+                                <li class="uk-nav-divider"></li>
+                                {% for mac in macs %}
+                                    <li><a class="underline-from-center"
+                                           href="/all-products/available/detail/{{ mac.subcategory_id }}/data-render/products">{{ mac.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">iPad</li>
+                                <li class="uk-nav-divider"></li>
+                                {% for ipad in ipads %}
+                                    <li><a class="underline-from-center"
+                                           href="/all-products/available/detail/{{ ipad.subcategory_id }}/data-render/products">{{ ipad.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">iPhone</li>
+                                <li class="uk-nav-divider"></li>
+                                {% for iphone in iphones %}
+                                    <li><a class="underline-from-center"
+                                           href="/all-products/available/detail/{{ iphone.subcategory_id }}/data-render/products/">{{ iphone.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Beats by Dre</li>
+                                <li class="uk-nav-divider"></li>
+                                {% for beat in beats %}
+                                    <li><a class="underline-from-center"
+                                           href="/all-products/available/detail/{{ beat.subcategory_id }}/data-render/products/">{{ beat.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Apple Care</li>
+                                <li class="uk-nav-divider"></li>
+                                {% for applecare in applecares %}
+                                    <li><a class="underline-from-center"
+                                           href="/all-products/available/detail/{{ applecare.subcategory_id }}/data-render/products/">{{ applecare.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Apple Accessories</li>
+                                <li class="uk-nav-divider"></li>
+                                {% for accessory in accessories %}
+                                    <li><a class="underline-from-center"
+                                           href="/all-products/available/detail/{{ accessory.subcategory_id }}/data-render/products/">{{ accessory.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bose <i class="fas fa-caret-down"></i></a>
+                </li>
+                <div class="uk-width-auto" uk-dropdown>
+                    <div class="uk-dropdown-grid uk-child-auto" uk-grid>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Bose</li>
+                                <li class="uk-nav-divider"></li>
+                                {% for bose in bose %}
+                                    <li><a class="underline-from-center"
+                                           href="/Bose-products/products/?subcategoryId={{ bose.subcategory_id }}">{{ bose.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">JBL <i class="fas fa-caret-down"></i></a>
+                </li>
+                <div class="uk-width-auto" uk-dropdown>
+                    <div class="uk-dropdown-grid uk-child-auto" uk-grid>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Headphones</li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a class="underline-from-center" href="#">In Ear Headphones</a></li>
+                                <li><a class="underline-from-center" href="#">Noise Cancelling Headphones</a></li>
+                                <li><a class="underline-from-center" href="#">Over-Ear & On-Ear Headphones</a></li>
+                                <li><a class="underline-from-center" href="#">True Wireless Headphones</a></li>
+                                <li><a class="underline-from-center" href="#">MacBook pro</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Speakers <i class="fas fa-caret-down"></i></li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a class="underline-from-center" href="#">portable Bluetooth Speaker</a></li>
+                                <li><a class="underline-from-center" href="#">Party Speakers</a></li>
+                                <li><a class="underline-from-center" href="#">home Speakers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accessories <i class="fas fa-caret-down"></i></a>
+                </li>
+                <div class="uk-width-auto" uk-dropdown>
+                    <div class="uk-dropdown-grid uk-child-auto" uk-grid>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Accesories</li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a class="underline-from-center" href="#">Cables & Data</a></li>
+                                <li><a class="underline-from-center" href="#">Cover and Cases</a></li>
+                                <li><a class="underline-from-center" href="#">Electronic Accessories</a></li>
+                                <li><a class="underline-from-center" href="#">Health and Care</a></li>
+                                <li><a class="underline-from-center" href="#">IoT</a></li>
+                                <li><a class="underline-from-center" href="#">iPad Protection</a></li>
+                                <li><a class="underline-from-center" href="#">iPhone Protection</a></li>
+                                <li><a class="underline-from-center" href="#">Music Accessories</a></li>
+                                <li><a class="underline-from-center" href="#">Power</a></li>
+                                <li><a class="underline-from-center" href="#">Projector and Accessories</a></li>
+                                <li><a class="underline-from-center" href="#">Sleeves and hard Cases</a></li>
+                                <li><a class="underline-from-center" href="#">Brackets for Speaker</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Brands <i class="fas fa-caret-down"></i></a>
+                </li>
+                <div class="uk-width-auto" uk-dropdown>
+                    <div class="uk-dropdown-grid uk-child-auto" uk-grid>
+                        <div>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li class="uk-active">Available Brands</li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a class="underline-from-center" href="#">Apple</a></li>
+                                <li><a class="underline-from-center" href="#">Bose</a></li>
+                                <li><a class="underline-from-center" href="#">Case Logic</a></li>
+                                <li><a class="underline-from-center" href="#">JBL</a></li>
+                                <li><a class="underline-from-center" href="#">JCPal</a></li>
+                                <li><a class="underline-from-center" href="#">Momax</a></li>
+                                <li><a class="underline-from-center" href="#">NEC</a></li>
+                                <li><a class="underline-from-center" href="#">Optoma</a></li>
+                                <li><a class="underline-from-center" href="#">Thule</a></li>
+                                <li><a class="underline-from-center" href="#">Verbatim</a></li>
+                                <li><a class="underline-from-center" href="#">Vivitek</a></li>
+                                <li><a class="underline-from-center" href="#">Yeelight</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+            <ul class="navbar-nav my-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart"><i class="fas fa-shopping-bag fa-lg"></i> Cart  <span
+                            class="badge badge-info">{{ request.session.cart.keys|length }}</span></a>
+                </li>
+                {% if request.session.username %}
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="/">Hello! {{ request.session.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customers/order">My Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customers/logout">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customers/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customers/signup">Signup</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!---END NAVBAR---->
+<body>
+
+{% block content %}
+{% endblock %}
+
+<!--Payment method-->
+<div class="payment-wrapper mt-5">
+    <h2 class="text-uppercase text-center font-weight-bold">Payment partner</h2>
+    <div class="container">
+        <div class="row">
+            {% for payment in payments %}
+                <div class="mx-auto col-sm-2 col-lg-2 mb-5 float-shadow">
+                    <img src="{{ payment.image.url }}" alt="">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!----FOOTER----->
+<footer class="text-center text-white" style="background-color: #000000">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+
+        <!-- Section: Social media -->
+        <!-- Section: Form -->
+        <section class="">
+            <form action="">
+                <!--Grid row-->
+                <div class="row d-flex justify-content-center">
+                    <!--Grid column-->
+                    <div class="col-auto">
+                        <p class="pt-2">
+                            <strong>Sign up for our newsletter</strong>
+                        </p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-5 col-12">
+                        <!-- Email input -->
+                        <div class="form-outline form-white mb-4">
+                            <input type="email" id="form5Example2" class="form-control"/>
+                            <label class="form-label" for="form5Example2">Email address</label>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-auto">
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-outline-light mb-4">
+                            Subscribe
+                        </button>
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </form>
+        </section>
+        <!-- Section: Form -->
+
+        <!-- Section: Text -->
+        <section class="mb-4">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+                repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+                eum harum corrupti dicta, aliquam sequi voluptate quas.
+            </p>
+        </section>
+        <!-- Section: Text -->
+
+        <!-- Section: Links -->
+        <section class="">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-4">
+                    <h5 class="text-uppercase font-weight-bold text-info">Explore</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Home</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Store Location</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">EMI</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Service</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-4">
+                    <h5 class="text-uppercase font-weight-bold text-info">Categories</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Cables & Data 1</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Cover and Cases</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Electronic Accessories</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Health and Care</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">IoT</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">iPad Protection</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">iPhone Protection</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Music Accessories</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-4">
+                    <h5 class="text-uppercase font-weight-bold text-info">Account</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">My Account</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Cart</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-4">
+                    <h5 class="text-uppercase font-weight-bold text-info">Brands</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Apple</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Bose</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Case Logic</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">JBL</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">JCPal</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white underline-from-center">Momax</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">kiran Web Development</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!----END FOOTER----->
+
+<!--External Scripts Animations-->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<!--End of AOS-->
+</body>
+</html>

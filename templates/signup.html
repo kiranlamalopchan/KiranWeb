@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-8 mx-auto">
+        <div class="card m-5">
+            {% if errmsg %}
+                <div class="alert alert-danger" role="alert">
+                    {{ errmsg }}
+                </div>
+            {% endif %}
+            <div class="card-body">
+                <form action="/customers/signup/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Username *</label>
+                            <input required class="form-control" name="uname"
+                                   value="{{ values.username|default:'' }}"
+                                   placeholder="Your username for login">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Password *</label>
+                            <div class="input-group">
+                                <input required type="password" class="form-control pwd" name="upass">
+                                <button class="btn border btn-sm btn-primary reveal" type="button">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Email *</label>
+                            <input required type="email" class="form-control" name="uemail"
+                                   placeholder="example@gmail.com"
+                                   value="{{ values.email|default:'' }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Mobile Number *</label>
+                            <input required type="text" class="form-control" name="umobile"
+                                   placeholder="98XXXXXXXX" maxlength="10"
+                                   pattern="[0-9]{10}" value="{{ values.mobilenumber|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" name="uaddress"
+                               placeholder="Recent address"
+                               value="{{ values.address|default:'' }}">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>City</label>
+                            <input type="text" class="form-control" name="ucity"
+                                   value="{{ values.city|default:'' }}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Country</label>
+                            <select  required name="ucountry" class="form-control">
+                                <option value="" disabled selected>Choose...</option>
+                                <option value="Nepal" {% if values.country == "Nepal" %}selected{% endif %}>Nepal</option>
+                                <option value="Australia" {% if values.country == "Australia" %}selected{% endif %}>Australia</option>
+                                <option value="India" {% if values.country == "India" %}selected{% endif %}>India</option>
+                                <option value="United States" {% if values.country == "United States" %}selected{% endif %}>United States</option>
+                                <!-- Add more countries as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Zip</label>
+                            <input type="text" class="form-control" name="uzip"
+                                   value="{{ values.zip|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="agree_terms" id="gridCheck"
+       value="checked" {% if values.agree_terms %}checked{% endif %}>
+
+                            <label class="form-check-label" for="gridCheck">
+                                I agree to the Terms and Conditions
+                            </label>
+                        </div>
+                        <div class="btn underline-from-center mt-2" data-toggle="collapse"
+                             href="#collapseExample" role="button" aria-expanded="false"
+                             aria-controls="collapseExample">
+                            Read more...
+                        </div>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body text-justify text-warning mt-2">
+                                By registering, you become a customer of Kiran Web Development Team.<br>
+                                - Able to log in<br>
+                                - Browse and buy products<br>
+                                - Make transactions<br>
+                                - Pay securely with digital wallets
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn border sweep-to-right mt-3">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".reveal").on('click', function () {
+        var $pwd = $(".pwd");
+        if ($pwd.attr('type') === 'password') {
+            $pwd.attr('type', 'text');
+        } else {
+            $pwd.attr('type', 'password');
+        }
+    });
+</script>
+{% endblock %}

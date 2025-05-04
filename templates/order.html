@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load cart %}
+    {% load custome_filters %}
+    {% load humanize %}
+    {% if message %}
+        <div class="text-center m-5">
+            <i class="fas fa-cart-plus fa-10x"></i>
+            <h1 class="text-center uk-text-bolder">
+                {{ message }}
+            </h1>
+            <a href="/">
+                <button type="button" class="btn btn-lg border sweep-to-right">Continue Shopping</button>
+            </a>
+
+        </div>
+    {% else %}
+        <div class="container">
+            <!--Review Cart-->
+            <h1 class="text-center uk-text-bolder m-3">My Order</h1>
+            <div clas="border">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th scope="col">Product-Id</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Per. Unit</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    {% for order in orders %}
+                        <tbody style="background-color: #F7F7F9">
+                        <tr class="text-center">
+                            <th scope="row" class="mx-auto">{{ order.product.id }}</th>
+                            <td><img style="height: 50px;" src="{{ order.product.image.url }}" alt="products in cart">
+                            </td>
+                            <td>{{ order.product.name }}</td>
+                            <td>{{ order.date }}</td>
+                            <td>Nrs. {{ order.product.price|intcomma }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>Nrs. {{ order.product.price|multiply:order.quantity|intcomma }}</td>
+                            {% if order.status %}
+                                <td><small class="badge badge-success">Completed</small></td>
+                            {% else %}
+                                <td><small class="badge badge-warning">Pending</small></td>
+                            {% endif %}
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+            <!--Review Cart End-->
+        </div>
+    {% endif %}
+{% endblock %}
